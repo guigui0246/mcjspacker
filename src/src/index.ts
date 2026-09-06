@@ -1,13 +1,20 @@
 import fs from 'fs/promises';
 import path from 'path';
 
-async function deleteDirectory(dir) {
+export type Context = {
+  [prop: string]: Context;
+  [Symbol.toStringTag]: () => string;
+  [Symbol.toPrimitive]: () => string;
+  (...args: unknown[]): Context;
+};
+
+async function deleteDirectory(dir: string) {
   try {
     await fs.rm(dir, { recursive: true });
   } catch {}
 }
 
-async function saveFile(outputDir, functionName, content) {
+async function saveFile(outputDir: string, functionName: string, content: string) {
   const filePath = path.normalize(path.join(outputDir, `${functionName}.mcfunction`));
   const normalizedDir = path.normalize(outputDir + '/');
   if (!filePath.startsWith(normalizedDir)) {
@@ -18,11 +25,11 @@ async function saveFile(outputDir, functionName, content) {
   await fs.writeFile(filePath, content);
 }
 
-function combinePaths(path1, path2) {
+function combinePaths(path1: string, path2: string) {
   return `${path1}/${path2}`.replaceAll(/[:/]+/g, '/').replaceAll(/^\/|\/$/g, '');
 }
 
-function getFunctionContent(strings, ...values) {
+function getFunctionContent(strings: TemplateStringsArray | string, ...values: unknown[]) {
   let functionContent;
   if (Array.isArray(strings)) {
     functionContent = `${strings[0]}`;
@@ -42,22 +49,22 @@ function getFunctionContent(strings, ...values) {
     .join('\n');
 }
 
-function isValidPathPart(part) {
+function isValidPathPart(part: string) {
   return part.match(/^[a-z0-9/:_-]+$/g);
 }
 
-function toSnakeCase(str) {
+function toSnakeCase(str: string) {
   return str.replace(/ /g, '_')
     .replace(/(_|^)([A-Z])/g, match => match.toLowerCase())
     .replace(/([A-Z])/g, match => '_' + match.toLowerCase());
 }
 
-export function createMCF({outputDir, functionCallPrefix}) {
+export function createMCF({outputDir, functionCallPrefix}: {outputDir: string, functionCallPrefix: string}): Context {
   const deleteDirectoryPromise = deleteDirectory(outputDir);
 
-  const nextAnonymousIds = {};
+  const nextAnonymousIds: Record<string, number> = {};
 
-  function createAnonymousContext(functionPath) {
+  function createAnonymousContext(functionPath: string) {
     if (functionPath === '') {
       functionPath = 'anonymous';
     }
@@ -65,15 +72,14 @@ export function createMCF({outputDir, functionCallPrefix}) {
     return createContext(`${functionPath}/anonymous_${id}`);
   }
 
-  function createContext(functionPath) {
+  function createContext(functionPath: string): Context {
     // replacing only the first / to :
     const createsAnonymousFunctions = functionPath === '' || functionPath === 'anonymous' || functionPath.endsWith('/anonymous');
     const asString = createsAnonymousFunctions ?
       '[ERR anonymous function]' :
       `function ${combinePaths(functionCallPrefix, functionPath).replace('/', ':')}`;
-    
 
-    function get(_target, prop) {
+    function get(_target: object, prop: string | symbol) {
       if (prop === Symbol.toStringTag || prop === Symbol.toPrimitive) {
         return () => asString;
       }
@@ -87,24 +93,24 @@ export function createMCF({outputDir, functionCallPrefix}) {
       return createContext(combinePaths(functionPath, prop));
     }
 
-    function set(_target) {
+    function set(_target: object) {
       return false;
     }
 
-    function target(...args) {
+    function target(...args: unknown[]) {
       if (createsAnonymousFunctions) {
         return createAnonymousContext(functionPath)(...args);
       }
-      const functionContent = getFunctionContent(...args);
+      const functionContent = getFunctionContent(...args as [TemplateStringsArray | string, ...unknown[]]);
 
       deleteDirectoryPromise.then(() => saveFile(outputDir, functionPath, functionContent));
 
       return proxy;
     }
 
-    const proxy = new Proxy(target, {get, set});
+    const proxy = new Proxy(target, {get, set}) as Context;
     return proxy;
   }
-  
+
   return createContext('');
 }

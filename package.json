@@ -2,10 +2,11 @@
   "name": "mcjspacker",
   "version": "0.3.0",
   "description": "A library to build Minecraft datapacks in JavaScript.",
-  "main": "src/index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "watch": "chokidar example --initial -c \"npm run build\"",
-    "build": "node example/datapack.js",
+    "build": "tsc",
+    "dev": "tsc --watch",
     "test": "node --test"
   },
   "type": "module",
@@ -13,12 +14,19 @@
     "example": "example"
   },
   "bin": {
-    "mcjspacker": "./bin/init.js"
+    "mcjspacker": "./bin/init.ts"
   },
-  "keywords": ["minecraft", "datapack", "javascript", "mcjs"],
+  "keywords": [
+    "minecraft",
+    "datapack",
+    "javascript",
+    "mcjs"
+  ],
   "author": "ofekn",
   "license": "MIT",
   "devDependencies": {
-    "chokidar-cli": "^3.0.0"
+    "@types/node": "^26.4.1",
+    "chokidar-cli": "^3.0.0",
+    "typescript": "^7.0.2"
   }
 }

@@ -9,7 +9,7 @@ import test from 'node:test';
 
 const execFileAsync = promisify(execFile);
 const testDirectory = path.dirname(fileURLToPath(import.meta.url));
-const projectDir = path.resolve(testDirectory, '..');
+const projectDir = path.resolve(testDirectory, '../dist');
 const expectedOutputPath = path.join(testDirectory, 'fixtures', 'example-output.json');
 
 async function readOutputTree(directory, relativeDirectory = '') {

@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-function fixNamespace(str) {
+function fixNamespace(str: string) {
   str = str.replace(/ /g, '_');
   str = str.replace(/(_|^)([A-Z])/g, match => match.toLowerCase());
   str = str.replace(/([A-Z])/g, match => '_' + match.toLowerCase());
@@ -24,7 +24,7 @@ const __dirname = path.dirname(__filename);
 const templateDir = path.join(__dirname, '../template');
 const targetDir = path.resolve(process.cwd(), dirArg);
 
-let namespace = nameArg || path.basename(targetDir);
+let namespace: string | null = nameArg || path.basename(targetDir);
 namespace = fixNamespace(namespace);
 if (!namespace) {
   console.error('Invalid namespace. Use only a-z, 0-9, _, or -');
@@ -46,11 +46,11 @@ if (fs.existsSync(targetDir)) {
   fs.mkdirSync(targetDir, { recursive: true });
 }
 
-const replaceFileNames = {
+const replaceFileNames: Record<string, string> = {
   'gitignore': '.gitignore',
 };
 
-function copyAndReplace(src, dest, replacements) {
+function copyAndReplace(src: string, dest: string, replacements: Record<string, string>) {
   const stat = fs.statSync(src);
   if (stat.isDirectory()) {
     fs.mkdirSync(dest, { recursive: true });
@@ -78,4 +78,4 @@ console.log(`Datapack created in ${targetDirStr}`);
 console.log('Run:');
 console.log(`  cd ${targetDirStr}`);
 console.log('  npm install');
-console.log('  npm run build'); 
+console.log('  npm run build');
