@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "watch": "chokidar example --initial -c \"npm run build\"",
-    "build": "node example/datapack.js"
+    "build": "node example/datapack.js",
+    "test": "node --test"
   },
   "type": "module",
   "directories": {

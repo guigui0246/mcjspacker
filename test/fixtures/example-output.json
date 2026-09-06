@@ -1,0 +1,19 @@
+{
+  "a.mcfunction": "say hello",
+  "a/anonymous/anonymous_1.mcfunction": "say testing a.anonymous functions from different sources 1",
+  "a/anonymous/anonymous_2.mcfunction": "say testing a.anonymous functions from different sources 2",
+  "anonymous/anonymous_1.mcfunction": "say hello from anonymous function",
+  "anonymous/anonymous_2.mcfunction": "say hello from inner function",
+  "anonymous/anonymous_3.mcfunction": "$say $(message)",
+  "anonymous/anonymous_4.mcfunction": "say testing anonymous functions from different sources 1",
+  "anonymous/anonymous_5.mcfunction": "say testing anonymous functions from different sources 2",
+  "b.mcfunction": "say world",
+  "book.mcfunction": "give @s itemframe{item_name:'platform',model:'redstone_block'}\ngive @s itemframe{item_name:'slime_block',model:'slime_block'}",
+  "example_inline_anonymous.mcfunction": "execute as @a[tag=test] run function test:generated/anonymous/anonymous_2\nsay hello from outer function",
+  "example_macro.mcfunction": "function test:generated/anonymous/anonymous_3 with {message: 'hello'}",
+  "recursive.mcfunction": "scoreboard players add @s example 1\nsay hello\nexecute if score @s example matches ..10 run function test:generated/recursive",
+  "recursive2.mcfunction": "scoreboard players add @s example 1\nsay hello\nexecute if score @s example matches ..10 run function test:generated/recursive2",
+  "test.mcfunction": "function test:generated/a\nfunction test:generated/b",
+  "wow/anonymous/anonymous_1.mcfunction": "say hello from anonymous function",
+  "wow/test_anonymous2.mcfunction": "function test:generated/wow/anonymous/anonymous_1"
+}
