@@ -5,9 +5,8 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch",
-    "test": "npm run build && node --test"
+    "watch": "chokidar example --initial -c \"npm run build\"",
+    "build": "node example/datapack.js"
   },
   "type": "module",
   "directories": {
