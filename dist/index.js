@@ -77,7 +77,7 @@ export function createMCF({ outputDir, functionCallPrefix }) {
             }
             return createContext(combinePaths(functionPath, prop));
         }
-        function set(_target) {
+        function set(_target, _prop, _value) {
             return false;
         }
         function target(...args) {

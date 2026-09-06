@@ -1,1 +1,1 @@
-{"version":3,"file":"mcf.js","sourceRoot":"","sources":["../../src/example/mcf.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAE,MAAM,iBAAiB,CAAC;AAE5C,MAAM,GAAG,GAAG,SAAS,CAAC;IACpB,SAAS,EAAE,QAAQ;IACnB,kBAAkB,EAAE,iBAAiB;CACtC,CAAC,CAAC;AAEH,eAAe,GAAG,CAAC"}
+{"version":3,"file":"mcf.js","sourceRoot":"","sources":["../../src/example/mcf.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAE,MAAM,aAAa,CAAC;AAExC,MAAM,GAAG,GAAG,SAAS,CAAC;IACpB,SAAS,EAAE,QAAQ;IACnB,kBAAkB,EAAE,iBAAiB;CACtC,CAAC,CAAC;AAEH,eAAe,GAAG,CAAC"}

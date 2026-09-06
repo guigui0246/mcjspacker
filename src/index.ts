@@ -79,7 +79,7 @@ export function createMCF({outputDir, functionCallPrefix}: {outputDir: string, f
       '[ERR anonymous function]' :
       `function ${combinePaths(functionCallPrefix, functionPath).replace('/', ':')}`;
 
-    function get(_target: object, prop: string | symbol) {
+    function get(_target: Context, prop: string | symbol): Context | (() => string) {
       if (prop === Symbol.toStringTag || prop === Symbol.toPrimitive) {
         return () => asString;
       }
@@ -93,11 +93,11 @@ export function createMCF({outputDir, functionCallPrefix}: {outputDir: string, f
       return createContext(combinePaths(functionPath, prop));
     }
 
-    function set(_target: object) {
+    function set(_target: Context, _prop: string | symbol, _value: unknown) {
       return false;
     }
 
-    function target(...args: unknown[]) {
+    function target(...args: unknown[]): Context {
       if (createsAnonymousFunctions) {
         return createAnonymousContext(functionPath)(...args);
       }
