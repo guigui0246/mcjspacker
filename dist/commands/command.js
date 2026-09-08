@@ -20,6 +20,17 @@ export class Command {
             this.validate();
         }
     }
+    toTemplate() {
+        let commandString = this.command;
+        if (!this.args) {
+            return [commandString, []];
+        }
+        if (this.args.every(arg => typeof arg === "string")) {
+            commandString += " " + this.args.join(" ");
+            return [commandString, []];
+        }
+        throw new Error("Not implemented: Command with non-string arguments");
+    }
 }
 export class CustomCommand extends Command {
     validate() { }

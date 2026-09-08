@@ -40,11 +40,11 @@ export function createMCF({outputDir, functionCallPrefix}: {outputDir: string, f
       return false;
     }
 
-    function target(...args: unknown[]): Context {
+    function target(...args: [ValidParam1, ...ValidParam2[]]): Context {
       if (createsAnonymousFunctions) {
         return createAnonymousContext(functionPath)(...args);
       }
-      const functionContent = getFunctionContent(...args as [TemplateStringsArray | string, ...unknown[]]);
+      const functionContent = getFunctionContent(...args);
 
       deleteDirectoryPromise.then(() => saveFile(outputDir, functionPath, functionContent));
 

@@ -4,6 +4,7 @@ export declare abstract class Command<T extends string[]> {
     constructor(command: CommandType, ...args: T);
     constructor(command: FullCommand);
     abstract validate(): void;
+    toTemplate(): [ValidParam1, ValidParam2[]];
 }
 export declare class CustomCommand extends Command<string[]> {
     validate(): void;

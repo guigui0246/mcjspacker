@@ -1,4 +1,5 @@
 import mcf from './mcf.js';
+import { Command } from '../index.js';
 // defining functions called a and b
 const funcA = mcf.a `say hello`;
 const funcB = mcf.b `say world`;
@@ -71,5 +72,17 @@ say testing a.anonymous functions from different sources 1
 `;
 mcf.a.anonymous `
 say testing a.anonymous functions from different sources 2
+`;
+mcf.g1(new Command("help"));
+mcf.g2(new Command("ban player"));
+mcf.g3(new Command("ban player reason"));
+mcf.g4(new Command("ban", "player"));
+mcf.g5(new Command("ban", "player", "reason"));
+mcf.g `
+${new Command("help")}
+${new Command("ban player")}
+${new Command("ban player reason")}
+${new Command("ban", "player")}
+${new Command("ban", "player", "reason")}
 `;
 //# sourceMappingURL=datapack.js.map
