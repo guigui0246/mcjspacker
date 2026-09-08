@@ -1,3 +1,3 @@
-declare const mcf: import("../index.js").Context;
+declare const mcf: Context;
 export default mcf;
 //# sourceMappingURL=mcf.d.ts.map

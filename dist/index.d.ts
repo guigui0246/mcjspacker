@@ -1,11 +1,3 @@
-export type Context = {
-    [prop: string]: Context;
-    [Symbol.toStringTag]: () => string;
-    [Symbol.toPrimitive]: () => string;
-    (...args: unknown[]): Context;
-};
-export declare function createMCF({ outputDir, functionCallPrefix }: {
-    outputDir: string;
-    functionCallPrefix: string;
-}): Context;
+export { createMCF } from './converter/context.js';
+export * from './commands/index.js';
 //# sourceMappingURL=index.d.ts.map
