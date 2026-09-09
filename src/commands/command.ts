@@ -1,12 +1,12 @@
 
 
-export abstract class Command<T extends string[]> {
+export abstract class Command {
     public command: CommandType;
-    public args: T | null;
+    public args: ValidParam2[] | null;
 
     public constructor(
         command: CommandType,
-        ...args: T
+        ...args: ValidParam2[]
     );
 
     public constructor(
@@ -15,11 +15,11 @@ export abstract class Command<T extends string[]> {
 
     public constructor(
         command: CommandType | FullCommand,
-        ...args: T
+        ...args: ValidParam2[]
     ) {
         if (args.length === 0) {
-            let fullargs = command.split(" ") as [CommandType, ...T];
-            let newcommand: CommandType, newargs: T;
+            let fullargs = command.split(" ") as [CommandType, ...ValidParam2[]];
+            let newcommand: CommandType, newargs: ValidParam2[];
             [newcommand, ...newargs] = fullargs;
             this.command = newcommand;
             this.args = newargs.length ? newargs : null;
@@ -48,10 +48,26 @@ export abstract class Command<T extends string[]> {
             commandString += " " + this.args.join(" ");
             return [commandString, []];
         }
-        throw new Error("Not implemented: Command with non-string arguments");
+        let commandTemplate: string[] = [commandString];
+        let args: ValidParam2[] = [];
+
+        for (const arg of this.args) {
+            if (typeof arg === "string") {
+                commandTemplate[commandTemplate.length - 1] += " " + arg;
+            } else {
+                commandTemplate[commandTemplate.length - 1] += " ";
+                args.push(arg);
+                commandTemplate.push("");
+            }
+        }
+
+        const template = Object.assign(commandTemplate, {
+            raw: commandTemplate,
+        }) as unknown as TemplateStringsArray;
+        return [template, args];
     }
 }
 
-export class CustomCommand extends Command<string[]> {
+export class CustomCommand extends Command {
     validate(): void {};
 }

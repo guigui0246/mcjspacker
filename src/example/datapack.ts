@@ -1,5 +1,5 @@
 import mcf from './mcf.js';
-import { Command } from '../index.js';
+import { Command, help } from '../index.js';
 
 // defining functions called a and b
 const funcA = mcf.a`say hello`;

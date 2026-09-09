@@ -29,7 +29,22 @@ export class Command {
             commandString += " " + this.args.join(" ");
             return [commandString, []];
         }
-        throw new Error("Not implemented: Command with non-string arguments");
+        let commandTemplate = [commandString];
+        let args = [];
+        for (const arg of this.args) {
+            if (typeof arg === "string") {
+                commandTemplate[commandTemplate.length - 1] += " " + arg;
+            }
+            else {
+                commandTemplate[commandTemplate.length - 1] += " ";
+                args.push(arg);
+                commandTemplate.push("");
+            }
+        }
+        const template = Object.assign(commandTemplate, {
+            raw: commandTemplate,
+        });
+        return [template, args];
     }
 }
 export class CustomCommand extends Command {
