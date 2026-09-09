@@ -29,7 +29,7 @@ say hello from outer function
 mcf.example_macro`
 ${mcf`
   $say $(message)
-`} with {message: 'hello'}
+`} {message: 'hello'}
 `
 
 // example of generating code dynamically
@@ -48,7 +48,7 @@ const items = [
 let book = '';
 for (const item of items) {
   book += `
-  give @s itemframe{item_name:'${item.name}',model:'${item.model}'}
+  give @s item_frame[item_name='${item.name}',item_model='${item.model}']
   `
 }
 mcf.book`
@@ -90,15 +90,15 @@ say testing a.anonymous functions from different sources 2
 `
 
 mcf.g1(new Command("help"))
-mcf.g2(new Command("ban player"))
-mcf.g3(new Command("ban player reason"))
-mcf.g4(new Command("ban", "player"))
-mcf.g5(new Command("ban", "player", "reason"))
+mcf.g2(new Command("tp player"))
+mcf.g3(new Command("tp player entity"))
+mcf.g4(new Command("tp", "player"))
+mcf.g5(new Command("tp", "player", "entity"))
 
 mcf.g`
 ${new Command("help")}
-${new Command("ban player")}
-${new Command("ban player reason")}
-${new Command("ban", "player")}
-${new Command("ban", "player", "reason")}
+${new Command("tp player")}
+${new Command("tp player entity")}
+${new Command("tp", "player")}
+${new Command("tp", "player", "entity")}
 `

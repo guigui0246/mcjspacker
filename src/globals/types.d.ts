@@ -9,10 +9,14 @@ type Context = {
   (...args: unknown[]): Context;
 };
 
+/** @deprecated Arbitrary command strings are supported, but not recommended. */
+type OtherCommand = (string & {});
+
 type CommandType = (
   "help" |
-  "ban" |
-  (string & {})
+  "give" |
+  "tp" |
+  OtherCommand
 )
 
 type FullCommand = `${CommandType}${string}`;
