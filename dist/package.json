@@ -27,5 +27,8 @@
     "@types/node": "^26.4.1",
     "chokidar-cli": "^3.0.0",
     "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "@spyglassmc/java-edition": "0.3.68"
   }
 }

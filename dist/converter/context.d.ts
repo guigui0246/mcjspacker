@@ -1,5 +1,5 @@
 export declare function createMCF({ outputDir, functionCallPrefix }: {
     outputDir: string;
     functionCallPrefix: string;
-}): Context;
+}, errorOnSpyglass?: boolean): Context;
 //# sourceMappingURL=context.d.ts.map
