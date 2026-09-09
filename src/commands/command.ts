@@ -1,6 +1,6 @@
 
 
-export abstract class Command {
+export abstract class Command implements CommandProto {
     public command: CommandType;
     public args: ValidParam2[] | null;
 

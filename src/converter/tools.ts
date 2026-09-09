@@ -11,8 +11,7 @@ export async function saveFile(outputDir: string, functionName: string, content:
   const filePath = path.normalize(path.join(outputDir, `${functionName}.mcfunction`));
   const normalizedDir = path.normalize(outputDir + '/');
   if (!filePath.startsWith(normalizedDir)) {
-    console.error(`Invalid function name: ${functionName}`);
-    return;
+    throw new Error(`Invalid function name: ${functionName}`);
   }
   await fs.mkdir(path.dirname(filePath), { recursive: true });
   await fs.writeFile(filePath, content);
@@ -30,4 +29,8 @@ export function toSnakeCase(str: string) {
   return str.replace(/ /g, '_')
     .replace(/(_|^)([A-Z])/g, match => match.toLowerCase())
     .replace(/([A-Z])/g, match => '_' + match.toLowerCase());
+}
+
+export async function moveFolder(source: string, outputDir: string) {
+  await fs.cp(source, outputDir, { recursive: true });
 }

@@ -1,3 +1,5 @@
+import { Command } from "../index.js";
+
 export function getFunctionContent(strings: ValidParam1, ...values: ValidParam2[]): string {
   let functionContent;
   if (typeof (strings as any)?.toTemplate === "function") {
@@ -8,11 +10,9 @@ export function getFunctionContent(strings: ValidParam1, ...values: ValidParam2[
   if (Array.isArray(strings)) {
     functionContent = `${strings[0]}`;
     for (let i = 0; i < values.length; i++) {
-      if (typeof (values[i] as any)?.toTemplate === "function") {
-        try {
-          let [newStrings, newValues] = (values[i] as CommandProto).toTemplate();
-          values[i] = getFunctionContent(newStrings, ...newValues);
-        } catch {}
+      if (values[i] instanceof Command) {
+        let [newStrings, newValues] = (values[i] as CommandProto).toTemplate();
+        values[i] = getFunctionContent(newStrings, ...newValues);
       }
       functionContent += values[i];
       functionContent += strings[i + 1];

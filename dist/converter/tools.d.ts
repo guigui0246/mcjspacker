@@ -3,4 +3,5 @@ export declare function saveFile(outputDir: string, functionName: string, conten
 export declare function combinePaths(path1: string, path2: string): string;
 export declare function isValidPathPart(part: string): RegExpMatchArray | null;
 export declare function toSnakeCase(str: string): string;
+export declare function moveFolder(source: string, outputDir: string): Promise<void>;
 //# sourceMappingURL=tools.d.ts.map

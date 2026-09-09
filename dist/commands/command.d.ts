@@ -1,4 +1,4 @@
-export declare abstract class Command {
+export declare abstract class Command implements CommandProto {
     command: CommandType;
     args: ValidParam2[] | null;
     constructor(command: CommandType, ...args: ValidParam2[]);
