@@ -1,14 +1,15 @@
-import { verifyUser } from "./verifiers.js";
+import { verifyUser } from "./verifiers.ts";
 
 abstract class Argument {
     public abstract toTemplate(): [ValidParam1, ValidParam2[]];
 }
 
 export class StringArgument extends Argument {
-    public constructor(
-        public txt: string
-    ) {
+    public txt: string;
+
+    public constructor(txt: string) {
         super();
+        this.txt = txt;
     }
 
     public toTemplate(): [ValidParam1, ValidParam2[]] {
@@ -17,10 +18,11 @@ export class StringArgument extends Argument {
 }
 
 export class NumberArgument extends Argument {
-    public constructor(
-        public value: number
-    ) {
+    public value: number;
+
+    public constructor(value: number) {
         super();
+        this.value = value;
     }
 
     public toTemplate(): [ValidParam1, ValidParam2[]] {
@@ -29,10 +31,11 @@ export class NumberArgument extends Argument {
 }
 
 export class BooleanArgument extends Argument {
-    public constructor(
-        public bool: boolean
-    ) {
+    public bool: boolean;
+
+    public constructor(bool: boolean) {
         super();
+        this.bool = bool;
     }
 
     public toTemplate(): [ValidParam1, ValidParam2[]] {
@@ -41,10 +44,11 @@ export class BooleanArgument extends Argument {
 }
 
 export class EntityArgument extends StringArgument {
-    public constructor(
-        public user: string
-    ) {
+    public user: string;
+
+    public constructor(user: string) {
         verifyUser(user);
         super(user);
+        this.user = user;
     }
 }

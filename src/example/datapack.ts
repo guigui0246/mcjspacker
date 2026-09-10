@@ -1,5 +1,4 @@
-import mcf from './mcf.js';
-import { Command, help } from '../index.js';
+import mcf from './mcf.ts';
 
 // defining functions called a and b
 const funcA = mcf.a`say hello`;
@@ -87,18 +86,4 @@ say testing a.anonymous functions from different sources 1
 `
 mcf.a.anonymous`
 say testing a.anonymous functions from different sources 2
-`
-
-mcf.g1(new Command("help"))
-mcf.g2(new Command("tp player"))
-mcf.g3(new Command("tp player entity"))
-mcf.g4(new Command("tp", "player"))
-mcf.g5(new Command("tp", "player", "entity"))
-
-mcf.g`
-${new Command("help")}
-${new Command("tp player")}
-${new Command("tp player entity")}
-${new Command("tp", "player")}
-${new Command("tp", "player", "entity")}
 `

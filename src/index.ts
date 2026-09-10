@@ -1,2 +1,2 @@
-export { createMCF } from './converter/context.js';
-export * from './commands/index.js';
+export { createMCF } from './converter/context.ts';
+export * from './commands/index.ts';

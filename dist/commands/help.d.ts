@@ -1,4 +1,4 @@
-import { Command } from "./command.js";
+import { Command } from "./command.ts";
 export declare class HelpCommand extends Command {
     constructor();
     constructor(command: ValidParam2, ...args: ValidParam2[]);

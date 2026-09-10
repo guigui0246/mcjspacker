@@ -1,5 +1,5 @@
-import { deleteDirectory, saveFile, combinePaths, isValidPathPart, toSnakeCase, moveFolder } from './tools.js';
-import { getFunctionContent } from './parser.js';
+import { deleteDirectory, saveFile, combinePaths, isValidPathPart, toSnakeCase, moveFolder } from './tools.ts';
+import { getFunctionContent } from './parser.ts';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';

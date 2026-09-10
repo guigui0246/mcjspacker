@@ -1,3 +1,3 @@
-export { CustomCommand as Command } from './command.js';
-export { HelpCommand, help } from './help.js';
-export * from './arguments/index.js';
+export { CustomCommand as Command } from './command.ts';
+export { HelpCommand, help } from './help.ts';
+export * from './arguments/index.ts';
