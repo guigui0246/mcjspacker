@@ -11,6 +11,7 @@ test('converts Command instances to commands', async () => {
     mcf.g3(new Command('tp player entity'));
     mcf.g4(new Command('tp', 'player'));
     mcf.g5(new Command('tp', 'player', 'entity'));
+    mcf.g6(new Command('tp', 'player', new Command('entity')));
     mcf.g\`
       \${new Command('help')}
       \${new Command('tp player')}
@@ -28,6 +29,7 @@ test('converts Command instances to commands', async () => {
       'g3.mcfunction': output['g3.mcfunction'],
       'g4.mcfunction': output['g4.mcfunction'],
       'g5.mcfunction': output['g5.mcfunction'],
+      'g6.mcfunction': output['g6.mcfunction'],
     },
     {
       'g.mcfunction': 'help\ntp player\ntp player entity\ntp player\ntp player entity',
@@ -36,6 +38,7 @@ test('converts Command instances to commands', async () => {
       'g3.mcfunction': 'tp player entity',
       'g4.mcfunction': 'tp player',
       'g5.mcfunction': 'tp player entity',
+      'g6.mcfunction': 'tp player entity',
     },
   );
 });

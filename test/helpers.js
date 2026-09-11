@@ -8,6 +8,9 @@ import { promisify } from 'node:util';
 const execFileAsync = promisify(execFile);
 const testDirectory = path.dirname(fileURLToPath(import.meta.url));
 const projectDir = path.resolve(testDirectory, '../src');
+const tscPath = fileURLToPath(
+  new URL("../node_modules/typescript/bin/tsc", import.meta.url),
+);
 
 async function readOutputTree(directory, relativeDirectory = '') {
   const entries = await readdir(path.join(directory, relativeDirectory), { withFileTypes: true });
@@ -25,7 +28,30 @@ async function readOutputTree(directory, relativeDirectory = '') {
   return output;
 }
 
+export async function compileTS(source) {
+  const temporaryDirectory = await mkdtemp(path.join(tmpdir(), 'mcjspacker-test-'));
+
+  try {
+    const sourcePath = path.join(temporaryDirectory, 'datapack.ts');
+    const relativePath = path.relative(temporaryDirectory, path.join(projectDir, 'index.ts')).replaceAll(path.sep, '/');
+    await writeFile(sourcePath, source.replaceAll('__PACKAGE__', relativePath));
+    await execFileAsync(process.execPath, [
+      tscPath,
+      "--noEmit",
+      "--allowImportingTsExtensions",
+      "--types", path.resolve(projectDir, "../node_modules/@types/node"),
+      sourcePath,
+      path.resolve(projectDir, 'globals/types.d.ts'),
+    ], {
+      cwd: temporaryDirectory,
+    });
+  } finally {
+    await rm(temporaryDirectory, { recursive: true, force: true });
+  }
+}
+
 export async function generateOutput(source) {
+  await compileTS(source);
   const temporaryDirectory = await mkdtemp(path.join(tmpdir(), 'mcjspacker-test-'));
 
   try {

@@ -25,11 +25,16 @@
   "author": "ofekn",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^26.4.1",
+    "@types/node": "^26.5.1",
     "chokidar-cli": "^3.0.0",
+    "tsc": "^2.0.4",
     "typescript": "^7.0.2"
   },
   "dependencies": {
-    "@spyglassmc/java-edition": "0.3.68"
+    "@spyglassmc/java-edition": "0.3.68",
+    "node": "^26.8.2"
+  },
+  "allowScripts": {
+    "node@26.8.2": true
   }
 }
