@@ -1,4 +1,4 @@
-import { Command } from "../index.js";
+import { Command } from "../commands/command.js";
 export function getFunctionContent(strings, ...values) {
     let functionContent;
     if (typeof strings?.toTemplate === "function") {

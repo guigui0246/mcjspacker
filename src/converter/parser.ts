@@ -1,4 +1,4 @@
-import { Command } from "../index.ts";
+import { Command } from "../commands/command.ts";
 
 export function getFunctionContent(strings: ValidParam1, ...values: ValidParam2[]): string {
   let functionContent;

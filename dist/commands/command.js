@@ -41,6 +41,11 @@ export class Command {
                 commandTemplate.push("");
             }
         }
+        console.log("this", this);
+        console.log("command", this.command);
+        console.log("args", this.args);
+        console.log("commandTemplate", commandTemplate);
+        console.log("args", args);
         const template = Object.assign(commandTemplate, {
             raw: commandTemplate,
         });
