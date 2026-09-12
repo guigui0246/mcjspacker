@@ -1,4 +1,3 @@
-import { Command, help } from '../index.ts';
 import mcf from './mcf.ts';
 
 // defining functions called a and b

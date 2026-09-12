@@ -1,4 +1,3 @@
-import { Command, help } from '../index.js';
 import mcf from './mcf.js';
 // defining functions called a and b
 const funcA = mcf.a `say hello`;
@@ -73,8 +72,4 @@ say testing a.anonymous functions from different sources 1
 mcf.a.anonymous `
 say testing a.anonymous functions from different sources 2
 `;
-mcf.g(help());
-mcf.g1(help(help()));
-mcf.g2(new Command('help', help()));
-mcf.g3(help(new Command("help")));
 //# sourceMappingURL=datapack.js.map

@@ -1,6 +1,6 @@
 export declare abstract class Command implements CommandProto {
-    command: CommandType;
-    args: ValidParam2[] | null;
+    private command;
+    private args;
     constructor(command: CommandType, ...args: ValidParam2[]);
     constructor(command: FullCommand);
     abstract validate(): void;

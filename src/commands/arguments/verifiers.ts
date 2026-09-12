@@ -33,3 +33,15 @@ export function verifyUser(user: string): void {
     }
     throw new Error(`Invalid user argument: ${user}. Usernames must be less than 16 characters or a valid UUID.`);
 }
+
+export function verifyPositiveNumber(num: number, allowZero: boolean = true): void {
+    if (typeof num !== "number" || isNaN(num)) {
+        throw new Error(`Invalid number argument: ${num}. Must be a valid number.`);
+    }
+    if (num < 0) {
+        throw new Error(`Invalid number argument: ${num}. Must be a non-negative number.`);
+    }
+    if (!allowZero && num === 0) {
+        throw new Error(`Invalid number argument: ${num}. Must be a strictly positive number.`);
+    }
+}

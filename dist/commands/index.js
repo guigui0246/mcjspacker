@@ -1,4 +1,5 @@
 export { CustomCommand as Command } from './command.js';
 export { HelpCommand, help } from './help.js';
+export { GiveCommand, give } from './give.js';
 export * from './arguments/index.js';
 //# sourceMappingURL=index.js.map

@@ -88,6 +88,7 @@ export function createMCF({ outputDir, functionCallPrefix }, errorOnSpyglass = f
             }
         } // End of running spyglassMC validation
         if (success) {
+            await deleteDirectory(outputDir);
             await moveFolder(tempOutputDir, outputDir);
             await deleteDirectory(tempOutputDir);
             console.log(`Datapack generated successfully in ${outputDir}/`);
