@@ -110,3 +110,59 @@ export class ItemComponentsArgument extends JsonArgument {
         super(components);
     }
 }
+
+export class PositionArgument extends StringArgument {
+    public constructor(position: string);
+
+    // @description: Relative defaults to "world" if not specified.
+    public constructor(x: number, y: number, z: number, relative?: RelativeTypes);
+
+    public constructor(
+        positionOrX: string | number,
+        y?: number,
+        z?: number,
+        relative: RelativeTypes = "world"
+    ) {
+        if (typeof positionOrX === "string") {
+            super(positionOrX);
+        } else {
+            if (typeof positionOrX != "number" || typeof y != "number" || typeof z != "number") {
+                throw new Error("If the first argument is a number, the second and third arguments must also be numbers.");
+            }
+            if (relative === "world") {
+                super(`${positionOrX} ${y} ${z}`);
+            } else if (relative === "relative" || relative === "~") {
+                super(`~${positionOrX} ~${y} ~${z}`);
+            } else if (relative === "local" || relative === "^") {
+                super(`^${positionOrX} ^${y} ^${z}`);
+            }
+        }
+    }
+}
+
+export class RotationArgument extends StringArgument {
+    public constructor(rotation: string);
+
+    public constructor(pitch: number, yaw: number, relative?: RelativeTypes);
+
+    public constructor(
+        rotationOrPitch: string | number,
+        yaw?: number,
+        relative: RelativeTypes = "world"
+    ) {
+        if (typeof rotationOrPitch === "string") {
+            super(rotationOrPitch);
+        } else {
+            if (typeof rotationOrPitch != "number" || typeof yaw != "number") {
+                throw new Error("If the first argument is a number, the second argument must also be a number.");
+            }
+            if (relative === "world") {
+                super(`${rotationOrPitch} ${yaw}`);
+            } else if (relative === "relative" || relative === "~") {
+                super(`~${rotationOrPitch} ~${yaw}`);
+            } else if (relative === "local" || relative === "^") {
+                super(`^${rotationOrPitch} ^${yaw}`);
+            }
+        }
+    }
+}

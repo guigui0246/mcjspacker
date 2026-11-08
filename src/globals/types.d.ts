@@ -15,7 +15,7 @@ type OtherCommand = (string & {});
 type CommandType = (
   "help" |
   "give" |
-  "tp" |
+  "tp" | "teleport" |
   OtherCommand
 )
 
@@ -23,3 +23,9 @@ type FullCommand = `${CommandType}${string}`;
 
 type ValidParam1 = TemplateStringsArray | string | CommandProto;
 type ValidParam2 = ((...args: [ValidParam1, ...ValidParam2[]]) => any) | CommandProto | string;
+
+type RelativeTypes = (
+  "world" |
+  "relative" | "~" |
+  "local" | "^"
+);
