@@ -78,6 +78,8 @@ export class ItemArgument extends StringArgument {
     }
 }
 
+export const Item = ItemArgument;
+
 export class AmountArgument extends NumberArgument {
     public amount: number;
 
@@ -90,6 +92,8 @@ export class AmountArgument extends NumberArgument {
         this.amount = amount;
     }
 }
+
+export const Amount = AmountArgument;
 
 class JsonArgument extends Argument {
     public json: object;
@@ -110,6 +114,8 @@ export class ItemComponentsArgument extends JsonArgument {
         super(components);
     }
 }
+
+export const ItemComponents = ItemComponentsArgument;
 
 export class PositionArgument extends StringArgument {
     public constructor(position: string);
@@ -140,6 +146,8 @@ export class PositionArgument extends StringArgument {
     }
 }
 
+export const Position = PositionArgument;
+
 export class RotationArgument extends StringArgument {
     public constructor(rotation: string);
 
@@ -166,3 +174,5 @@ export class RotationArgument extends StringArgument {
         }
     }
 }
+
+export const Rotation = RotationArgument;
