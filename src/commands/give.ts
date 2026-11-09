@@ -5,14 +5,13 @@ let _item: ItemArgument | null = null;
 let _data: number | null = null;
 let _components: ItemComponentsArgument | null = null;
 
-export class GiveCommand extends Command {
-
-    public constructor(
-        target: EntityArgument | string,
-        item: ItemArgument | string,
+export class GiveCommand<JavaSpecific extends boolean = false, BedrockSpecific extends boolean = false> extends Command<JavaSpecific, BedrockSpecific> {
+  public constructor(
+        target: EntityArgument<JavaSpecific, BedrockSpecific> | string,
+        item: ItemArgument<JavaSpecific, BedrockSpecific> | string,
         amount?: AmountArgument | number,
-        data?: number,
-        components?: ItemComponentsArgument | object,
+        data?: BedrockSpecific extends true ? number : never,
+        components?: BedrockSpecific extends true ? ItemComponentsArgument<false, true> | object : never,
     ) {
         _item = null;
         _data = null;
@@ -41,11 +40,11 @@ export class GiveCommand extends Command {
             super("give", target, item, amount, strdata);
             return
         }
-        if (!(components instanceof ItemComponentsArgument)) {
-            components = new ItemComponentsArgument(components);
+        _components = components as ItemComponentsArgument<false, true>;
+        if (!(_components instanceof ItemComponentsArgument)) {
+            _components = new ItemComponentsArgument(_components);
         }
-        _components = components as ItemComponentsArgument;
-        super("give", target, item, amount, strdata, components as ItemComponentsArgument);
+        super("give", target, item, amount, strdata, _components);
     }
 
     public validate(): void {
@@ -73,12 +72,15 @@ export class GiveCommand extends Command {
     };
 }
 
-export function give(
-    target: EntityArgument | string,
-    item: ItemArgument | string,
+export function give<
+    JavaSpecific extends boolean = false,
+    BedrockSpecific extends boolean = false
+>(
+    target: EntityArgument<JavaSpecific, BedrockSpecific> | string,
+    item: ItemArgument<JavaSpecific, BedrockSpecific> | string,
     amount?: AmountArgument | number,
-    data?: number,
-    components?: ItemComponentsArgument | object,
-): GiveCommand {
-    return new GiveCommand(target, item, amount, data, components);
+    data?: BedrockSpecific extends true ? number : never,
+    components?: BedrockSpecific extends true ? ItemComponentsArgument<false, true> | object : never,
+): GiveCommand<JavaSpecific, BedrockSpecific> {
+    return new GiveCommand<JavaSpecific, BedrockSpecific>(target, item, amount, data, components);
 }

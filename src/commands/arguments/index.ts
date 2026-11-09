@@ -53,7 +53,7 @@ class BooleanArgument extends Argument {
     }
 }
 
-export class EntityArgument extends StringArgument {
+export class EntityArgument<JavaSpecific extends boolean = false, BedrockSpecific extends boolean = false> extends StringArgument {
     public user: string;
 
     public constructor(user: string) {
@@ -63,7 +63,7 @@ export class EntityArgument extends StringArgument {
     }
 }
 
-export class ItemArgument extends StringArgument {
+export class ItemArgument<JavaSpecific extends boolean = false, BedrockSpecific extends boolean = false> extends StringArgument {
     public item: string;
 
     public constructor(item: string) {
@@ -108,7 +108,7 @@ class JsonArgument extends Argument {
     }
 }
 
-export class ItemComponentsArgument extends JsonArgument {
+export class ItemComponentsArgument<JavaSpecific extends boolean = false, BedrockSpecific extends boolean = false> extends JsonArgument {
     public constructor(components: object) {
         // TODO: verifyItemComponents(components);
         super(components);

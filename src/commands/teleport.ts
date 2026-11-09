@@ -1,82 +1,82 @@
 import { EntityArgument, PositionArgument, RotationArgument } from "../index.ts";
 import { Command } from "./command.ts";
 
-export class TeleportCommand extends Command {
+export class TeleportCommand<JavaSpecific extends boolean = false, BedrockSpecific extends boolean = false> extends Command<JavaSpecific, BedrockSpecific> {
 
     public constructor(
-        Destination: EntityArgument | PositionArgument | string,
-        checkForBlocks?: boolean
+        Destination: EntityArgument<JavaSpecific, BedrockSpecific> | PositionArgument | string,
+        checkForBlocks?: BedrockSpecific extends true ? boolean : never
     );
 
     public constructor(
-        Target: EntityArgument | string,
-        Destination: EntityArgument | PositionArgument | string,
+        Target: EntityArgument<JavaSpecific, BedrockSpecific> | string,
+        Destination: EntityArgument<JavaSpecific, BedrockSpecific> | PositionArgument | string,
         rotation?: RotationArgument | string,
-        checkForBlocks?: boolean
+        checkForBlocks?: BedrockSpecific extends true ? boolean : never
     );
 
     public constructor(
-        Target: EntityArgument | string,
+        Target: EntityArgument<JavaSpecific, BedrockSpecific> | string,
         DestinationX: number | string,
         DestinationY: number | string,
         DestinationZ: number | string,
         rotation?: RotationArgument | string,
-        checkForBlocks?: boolean
+        checkForBlocks?: BedrockSpecific extends true ? boolean : never
     );
 
     public constructor(
-        Target: EntityArgument | string,
-        Destination: EntityArgument | PositionArgument | string,
+        Target: EntityArgument<JavaSpecific, BedrockSpecific> | string,
+        Destination: EntityArgument<JavaSpecific, BedrockSpecific> | PositionArgument | string,
         rotationX: number | string,
         rotationY: number | string,
-        checkForBlocks?: boolean
+        checkForBlocks?: BedrockSpecific extends true ? boolean : never
     );
 
     public constructor(
-        Target: EntityArgument | string,
+        Target: EntityArgument<JavaSpecific, BedrockSpecific> | string,
         DestinationX: number | string,
         DestinationY: number | string,
         DestinationZ: number | string,
         rotationX: number | string,
         rotationY: number | string,
-        checkForBlocks?: boolean
+        checkForBlocks?: BedrockSpecific extends true ? boolean : never
     );
 
     public constructor(
-        Target: EntityArgument | string,
-        Destination: EntityArgument | PositionArgument | string,
+        Target: EntityArgument<JavaSpecific, BedrockSpecific> | string,
+        Destination: EntityArgument<JavaSpecific, BedrockSpecific> | PositionArgument | string,
         facing: "facing",
-        Facing: EntityArgument | PositionArgument | string,
-        checkForBlocks?: boolean
+        Facing: EntityArgument<JavaSpecific, BedrockSpecific> | PositionArgument | string,
+        checkForBlocks?: BedrockSpecific extends true ? boolean : never
     );
 
     public constructor(
-        Target: EntityArgument | string,
+        Target: EntityArgument<JavaSpecific, BedrockSpecific> | string,
         DestinationX: number | string,
         DestinationY: number | string,
         DestinationZ: number | string,
         facing: "facing",
-        Facing: EntityArgument | PositionArgument | string,
-        checkForBlocks?: boolean
+        Facing: EntityArgument<JavaSpecific, BedrockSpecific> | PositionArgument | string,
+        checkForBlocks?: BedrockSpecific extends true ? boolean : never
     );
 
     public constructor(
-        Target: EntityArgument | string,
-        Destination: EntityArgument | PositionArgument | string,
+        Target: EntityArgument<JavaSpecific, BedrockSpecific> | string,
+        Destination: EntityArgument<JavaSpecific, BedrockSpecific> | PositionArgument | string,
         facing: "facing",
-        entity: "entity",
-        Facing: EntityArgument | string,
+        entity: JavaSpecific extends true ? "entity" : never,
+        Facing: EntityArgument<JavaSpecific, BedrockSpecific> | string,
         anchor?: "eyes" | "feet"
     );
 
     public constructor(
-        Target: EntityArgument | string,
+        Target: EntityArgument<JavaSpecific, BedrockSpecific> | string,
         DestinationX: number | string,
         DestinationY: number | string,
         DestinationZ: number | string,
         facing: "facing",
-        entity: "entity",
-        Facing: EntityArgument | string,
+        entity: JavaSpecific extends true ? "entity" : never,
+        Facing: EntityArgument<JavaSpecific, BedrockSpecific> | string,
         anchor?: "eyes" | "feet"
     );
 
@@ -156,87 +156,117 @@ export class TeleportCommand extends Command {
     };
 }
 
-export function teleport(
-    Destination: EntityArgument | PositionArgument | string,
-    checkForBlocks?: boolean
-): TeleportCommand;
+export function teleport<
+    JavaSpecific extends boolean = false,
+    BedrockSpecific extends boolean = false
+>(
+    Destination: EntityArgument<JavaSpecific, BedrockSpecific> | PositionArgument | string,
+    checkForBlocks?: BedrockSpecific extends true ? boolean : never
+): TeleportCommand<JavaSpecific, BedrockSpecific>;
 
-export function teleport(
-    Target: EntityArgument | string,
-    Destination: EntityArgument | PositionArgument | string,
+export function teleport<
+    JavaSpecific extends boolean = false,
+    BedrockSpecific extends boolean = false
+>(
+    Target: EntityArgument<JavaSpecific, BedrockSpecific> | string,
+    Destination: EntityArgument<JavaSpecific, BedrockSpecific> | PositionArgument | string,
     rotation?: RotationArgument | string,
-    checkForBlocks?: boolean
-): TeleportCommand;
+    checkForBlocks?: BedrockSpecific extends true ? boolean : never
+): TeleportCommand<JavaSpecific, BedrockSpecific>;
 
-export function teleport(
-    Target: EntityArgument | string,
+export function teleport<
+    JavaSpecific extends boolean = false,
+    BedrockSpecific extends boolean = false
+>(
+    Target: EntityArgument<JavaSpecific, BedrockSpecific> | string,
     DestinationX: number | string,
     DestinationY: number | string,
     DestinationZ: number | string,
     rotation?: RotationArgument | string,
-    checkForBlocks?: boolean
-): TeleportCommand;
+    checkForBlocks?: BedrockSpecific extends true ? boolean : never
+): TeleportCommand<JavaSpecific, BedrockSpecific>;
 
-export function teleport(
-    Target: EntityArgument | string,
-    Destination: EntityArgument | PositionArgument | string,
+export function teleport<
+    JavaSpecific extends boolean = false,
+    BedrockSpecific extends boolean = false
+>(
+    Target: EntityArgument<JavaSpecific, BedrockSpecific> | string,
+    Destination: EntityArgument<JavaSpecific, BedrockSpecific> | PositionArgument | string,
     rotationX: number | string,
     rotationY: number | string,
     checkForBlocks?: boolean
-): TeleportCommand;
+): TeleportCommand<JavaSpecific, BedrockSpecific>;
 
-export function teleport(
-    Target: EntityArgument | string,
+export function teleport<
+    JavaSpecific extends boolean = false,
+    BedrockSpecific extends boolean = false
+>(
+    Target: EntityArgument<JavaSpecific, BedrockSpecific> | string,
     DestinationX: number | string,
     DestinationY: number | string,
     DestinationZ: number | string,
     rotationX: number | string,
     rotationY: number | string,
     checkForBlocks?: boolean
-): TeleportCommand;
+): TeleportCommand<JavaSpecific, BedrockSpecific>;
 
-export function teleport(
-    Target: EntityArgument | string,
-    Destination: EntityArgument | PositionArgument | string,
+export function teleport<
+    JavaSpecific extends boolean = false,
+    BedrockSpecific extends boolean = false
+>(
+    Target: EntityArgument<JavaSpecific, BedrockSpecific> | string,
+    Destination: EntityArgument<JavaSpecific, BedrockSpecific> | PositionArgument | string,
     facing: "facing",
-    Facing: EntityArgument | PositionArgument | string,
+    Facing: EntityArgument<JavaSpecific, BedrockSpecific> | PositionArgument | string,
     checkForBlocks?: boolean
-): TeleportCommand;
+): TeleportCommand<JavaSpecific, BedrockSpecific>;
 
-export function teleport(
-    Target: EntityArgument | string,
+export function teleport<
+    JavaSpecific extends boolean = false,
+    BedrockSpecific extends boolean = false
+>(
+    Target: EntityArgument<JavaSpecific, BedrockSpecific> | string,
     DestinationX: number | string,
     DestinationY: number | string,
     DestinationZ: number | string,
     facing: "facing",
-    Facing: EntityArgument | PositionArgument | string,
+    Facing: EntityArgument<JavaSpecific, BedrockSpecific> | PositionArgument | string,
     checkForBlocks?: boolean
-): TeleportCommand;
+): TeleportCommand<JavaSpecific, BedrockSpecific>;
 
-export function teleport(
-    Target: EntityArgument | string,
-    Destination: EntityArgument | PositionArgument | string,
+export function teleport<
+    JavaSpecific extends boolean = false,
+    BedrockSpecific extends boolean = false
+>(
+    Target: EntityArgument<JavaSpecific, BedrockSpecific> | string,
+    Destination: EntityArgument<JavaSpecific, BedrockSpecific> | PositionArgument | string,
     facing: "facing",
     entity: "entity",
-    Facing: EntityArgument | string,
+    Facing: EntityArgument<JavaSpecific, BedrockSpecific> | string,
     anchor?: "eyes" | "feet"
-): TeleportCommand;
+): TeleportCommand<JavaSpecific, BedrockSpecific>;
 
-export function teleport(
-    Target: EntityArgument | string,
+export function teleport<
+    JavaSpecific extends boolean = false,
+    BedrockSpecific extends boolean = false
+>(
+    Target: EntityArgument<JavaSpecific, BedrockSpecific> | string,
     DestinationX: number | string,
     DestinationY: number | string,
     DestinationZ: number | string,
     facing: "facing",
     entity: "entity",
-    Facing: EntityArgument | string,
+    Facing: EntityArgument<JavaSpecific, BedrockSpecific> | string,
     anchor?: "eyes" | "feet"
-): TeleportCommand;
+): TeleportCommand<JavaSpecific, BedrockSpecific>;
 
-export function teleport(
+export function teleport<
+    JavaSpecific extends boolean = false,
+    BedrockSpecific extends boolean = false
+>(
     ...args: unknown[]
-): TeleportCommand {
-    return new TeleportCommand(...args as ConstructorParameters<typeof TeleportCommand>);
+): TeleportCommand<JavaSpecific, BedrockSpecific> {
+    return new TeleportCommand<JavaSpecific, BedrockSpecific>(...args as ConstructorParameters<typeof TeleportCommand<JavaSpecific, BedrockSpecific>>);
 }
 
 export const tp = teleport;

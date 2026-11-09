@@ -1,6 +1,6 @@
 
 
-export abstract class Command implements CommandProto {
+export abstract class Command<JavaSpecific extends boolean = false, BedrockSpecific extends boolean = false> implements CommandProto {
     private command: CommandType;
     private args: ValidParam2[] | null;
 
