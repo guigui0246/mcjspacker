@@ -71,3 +71,10 @@ export abstract class Command<JavaSpecific extends boolean = false, BedrockSpeci
 export class CustomCommand extends Command {
     validate(): void {};
 }
+
+
+export class Lvl3or4Command extends Command {
+    validate(): void {
+        throw new Error("Datapacks only have lvl 2 power validation failed");
+    };
+}
